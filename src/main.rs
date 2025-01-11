@@ -1,7 +1,7 @@
 mod cli;
 mod config;
 
-use config::{Config, FileConfig};
+use config::Config;
 
 fn main() {
     let config = Config::load(String::from("hoge"));
