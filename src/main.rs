@@ -3,12 +3,15 @@ mod config;
 mod path;
 
 use config::Config;
-use path::{expand_tilda, home_dir};
+use path::{copy_path, expand_tilda, home_dir};
 use std::{fs, path::Path};
 
 fn main() {
     let config = Config::load(String::from("hoge"));
-    println!("{:?}", config);
-    let dir = config.dir();
-    println!("{}", expand_tilda(dir).to_string_lossy());
+    config.init();
+    copy_path(
+        &config.dir(),
+        config.dotfiles()[0].src(),
+        config.dotfiles()[0].dest(),
+    );
 }
