@@ -1,14 +1,9 @@
+mod cli;
 mod config;
 
 use config::{Config, FileConfig};
 
 fn main() {
-    let config = Config::new(
-        "dir_hoge".to_string(),
-        vec![FileConfig::new(
-            "dest_hoge".to_string(),
-            "src_hoge".to_string(),
-        )],
-    );
+    let config = Config::load(String::from("hoge"));
     println!("{:?}", config);
 }

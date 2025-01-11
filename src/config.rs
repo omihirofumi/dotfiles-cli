@@ -17,6 +17,22 @@ impl Config {
             dotfiles: dotfiles,
         }
     }
+    pub fn load(filename: String) -> Self {
+        let _ = filename;
+        Config {
+            dir: "~/temp/dotfiles".to_string(),
+            dotfiles: vec![FileConfig {
+                dest: "wezterm".to_string(),
+                src: "~/.wezterm.lua".to_string(),
+            }],
+        }
+    }
+    pub fn dir(&self) -> &str {
+        &self.dir
+    }
+    pub fn dotfiles(&self) -> &Vec<FileConfig> {
+        &self.dotfiles
+    }
 }
 
 impl FileConfig {
