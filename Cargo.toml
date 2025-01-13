@@ -6,3 +6,5 @@ edition = "2021"
 [dependencies]
 dircpy = "0.3.19"
 dirs = "5.0.1"
+serde = { version = "1.0.217", features = ["derive"] }
+toml = "0.8.19"

@@ -20,18 +20,19 @@ pub fn expand_tilda(path: &str) -> PathBuf {
     }
 }
 
-pub fn copy_path(dir: &str, src: &str, dest: &str) {
-    let dest_path = expand_tilda(dir).join(dest);
-    let src_path = expand_tilda(src);
+pub fn copy_path(src: &Path, dest: &Path) {
+    let filename = src.file_name().ok_or("cannot get filename").unwrap();
+    let dest_path = dest.join(filename);
+
     println!(
         "copying {} to {}...",
-        src_path.to_string_lossy(),
+        src.to_string_lossy(),
         dest_path.to_string_lossy()
     );
-    if src_path.is_dir() {
-        copy_dir(&src_path, &dest_path).unwrap();
+    if src.is_dir() {
+        copy_dir(&src, &dest_path).unwrap();
     } else {
-        fs::copy(src_path, dest_path).unwrap();
+        fs::copy(src, dest_path).unwrap();
     }
 }
 

@@ -2,4 +2,8 @@
 dir = "~/temp/dotfiles"
 
 [dotfiles]
-wezterm = { dest = "wezterm.lua", src = "~/.wezterm.lua" }
+wezterm = "~/.wezterm.lua"
+fish = "~/.config/fish"
+ghostty = "~/.config/ghostty"
+karabiner = "~/.config/karabiner/karabiner.json"
+lvim = "~/.config/lvim"
