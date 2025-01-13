@@ -21,21 +21,17 @@ pub fn expand_tilda(path: &str) -> PathBuf {
 }
 
 pub fn copy_path(src: &Path, dest: &Path) {
-    let filename = src.file_name().ok_or("cannot get filename").unwrap();
-    let dest_path = dest.join(filename);
-
     println!(
         "copying {} to {}...",
         src.to_string_lossy(),
-        dest_path.to_string_lossy()
+        dest.to_string_lossy()
     );
     if src.is_dir() {
-        copy_dir(&src, &dest_path).unwrap();
+        copy_dir(src, dest).unwrap();
     } else {
+        let filename = src.file_name().ok_or("cannot get filename").unwrap();
+        let dest_path = dest.join(filename);
+        fs::create_dir_all(dest).unwrap();
         fs::copy(src, dest_path).unwrap();
     }
-}
-
-pub fn resolve_path(dir: &str, name: &str) -> PathBuf {
-    Path::new(dir).join(name)
 }
