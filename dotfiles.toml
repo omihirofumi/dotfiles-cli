@@ -1,0 +1,5 @@
+[general]
+dir = "~/temp/dotfiles"
+
+[dotfiles]
+wezterm = { dest = "wezterm.lua", src = "~/.wezterm.lua" }

@@ -4,4 +4,5 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+dircpy = "0.3.19"
 dirs = "5.0.1"

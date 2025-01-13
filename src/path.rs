@@ -1,4 +1,9 @@
-use std::{fs, path::PathBuf};
+use std::{
+    fs,
+    path::{Path, PathBuf},
+};
+
+use dircpy::copy_dir;
 
 pub fn home_dir() -> PathBuf {
     dirs::home_dir()
@@ -23,5 +28,13 @@ pub fn copy_path(dir: &str, src: &str, dest: &str) {
         src_path.to_string_lossy(),
         dest_path.to_string_lossy()
     );
-    fs::copy(src_path, dest_path).unwrap();
+    if src_path.is_dir() {
+        copy_dir(&src_path, &dest_path).unwrap();
+    } else {
+        fs::copy(src_path, dest_path).unwrap();
+    }
+}
+
+pub fn resolve_path(dir: &str, name: &str) -> PathBuf {
+    Path::new(dir).join(name)
 }

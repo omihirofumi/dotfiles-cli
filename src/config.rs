@@ -10,6 +10,7 @@ pub struct Config {
 
 #[derive(Debug)]
 pub struct FileConfig {
+    name: String,
     dest: String,
     src: String,
 }
@@ -20,13 +21,14 @@ impl Config {
         Config {
             dir: "~/temp/dotfiles".to_string(),
             dotfiles: vec![FileConfig {
+                name: "wezterm".to_string(),
                 dest: "wezterm.lua".to_string(),
                 src: "~/.wezterm.lua".to_string(),
             }],
         }
     }
     pub fn init(&self) {
-        fs::create_dir_all(&self.dir()).unwrap();
+        fs::create_dir_all(self.dir()).unwrap();
     }
     pub fn dir(&self) -> String {
         expand_tilda(&self.dir)
@@ -41,8 +43,9 @@ impl Config {
 }
 
 impl FileConfig {
-    pub fn new(dest: String, src: String) -> Self {
+    pub fn new(name: String, dest: String, src: String) -> Self {
         FileConfig {
+            name: name,
             dest: dest,
             src: src,
         }
@@ -52,5 +55,8 @@ impl FileConfig {
     }
     pub fn dest(&self) -> &str {
         &self.dest
+    }
+    pub fn name(&self) -> &str {
+        &self.name
     }
 }
