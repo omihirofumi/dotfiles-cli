@@ -31,7 +31,6 @@ pub fn copy_path(src: &Path, dest: &Path) {
     } else {
         let filename = src.file_name().ok_or("cannot get filename").unwrap();
         let dest_path = dest.join(filename);
-        fs::create_dir_all(dest).unwrap();
         fs::copy(src, dest_path).unwrap();
     }
 }
